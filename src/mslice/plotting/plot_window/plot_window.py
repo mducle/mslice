@@ -1,8 +1,9 @@
 from qtpy import QtCore, QtWidgets
 
 from matplotlib.figure import Figure
-from mantidqt.icons import get_icon
-from mantidqt.utils.qt.line_edit_double_validator import LineEditDoubleValidator
+#from mantidqt.icons import get_icon
+#from mantidqt.utils.qt.line_edit_double_validator import LineEditDoubleValidator
+from qtpy.QtGui import QDoubleValidator as LineEditDoubleValidator
 
 from mslice.plotting.backend import get_canvas_and_toolbar_cls
 from mslice.util.intensity_correction import IntensityType, IntensityCache
@@ -366,8 +367,8 @@ def add_action(
     """Create a new action based on the given attributes and add it to the given
     holder"""
     action = QtWidgets.QAction(text, parent)
-    if icon_name is not None:
-        action.setIcon(get_icon(icon_name))
+    #if icon_name is not None:
+    #    action.setIcon(get_icon(icon_name))
     action.setCheckable(checkable)
     action.setChecked(checked)
     action.setVisible(visible)

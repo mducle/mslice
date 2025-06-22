@@ -26,7 +26,7 @@ from .column_info import Column
 from mslice.plotting.globalfiguremanager import GlobalFigureManager
 from mslice.widgets.plotselector.presenter import PlotSelectorPresenter
 
-from mantidqt.icons import get_icon
+#from mantidqt.icons import get_icon
 from mantidqt.utils.flowlayout import FlowLayout
 from mantidqt.utils.qt.qappthreadcall import QAppThreadCall
 
@@ -119,8 +119,8 @@ class PlotSelectorView(QWidget):
         self.rename_in_plot_list = QAppThreadCall(self.rename_in_plot_list_orig)
         self.set_active_font_orig = self.set_active_font
         self.set_active_font = QAppThreadCall(self.set_active_font_orig)
-        self.set_visibility_icon_orig = self.set_visibility_icon
-        self.set_visibility_icon = QAppThreadCall(self.set_visibility_icon_orig)
+        #self.set_visibility_icon_orig = self.set_visibility_icon
+        #self.set_visibility_icon = QAppThreadCall(self.set_visibility_icon_orig)
         self.set_last_active_values_orig = self.set_last_active_values
         self.set_last_active_values = QAppThreadCall(self.set_last_active_values_orig)
         self.sort_type_orig = self.sort_type
@@ -374,19 +374,19 @@ class PlotSelectorView(QWidget):
 
     # ------------------------ Plot Hiding -------------------------
 
-    def set_visibility_icon(self, plot_number, is_visible):
-        """
-        Toggles the plot name widget icon between visible and hidden
-        :param plot_number: The unique number in GlobalFigureManager
-        :param is_visible: If true set visible, else set hidden
-        """
-        with QMutexLocker(self.mutex):
-            row, widget = self._get_row_and_widget_from_plot_number(plot_number)
-            if row is None or widget is None:
-                raise ValueError(
-                    f"Unable to find row and/or widget from plot_number {plot_number}"
-                )
-            widget.set_visibility_icon(is_visible)
+    #def set_visibility_icon(self, plot_number, is_visible):
+    #    """
+    #    Toggles the plot name widget icon between visible and hidden
+    #    :param plot_number: The unique number in GlobalFigureManager
+    #    :param is_visible: If true set visible, else set hidden
+    #    """
+    #    with QMutexLocker(self.mutex):
+    #        row, widget = self._get_row_and_widget_from_plot_number(plot_number)
+    #        if row is None or widget is None:
+    #            raise ValueError(
+    #                f"Unable to find row and/or widget from plot_number {plot_number}"
+    #            )
+    #        widget.set_visibility_icon(is_visible)
 
     # ----------------------- Plot Filtering ------------------------
 
@@ -689,32 +689,32 @@ class PlotNameWidget(QWidget):
         # the editingFinished signal, which was causing #26305
         self.line_edit.setDisabled(True)
 
-        shown_icon = get_icon("mdi.eye")
-        self.hide_button = QPushButton(shown_icon, "")
+        #shown_icon = get_icon("mdi.eye")
+        self.hide_button = QPushButton("Show")
         self.hide_button.setToolTip("Hide")
         self.hide_button.setFlat(True)
-        self.hide_button.setMaximumWidth(
-            int(self.hide_button.iconSize().width() * 5 / 3)
-        )
+        #self.hide_button.setMaximumWidth(
+        #    int(self.hide_button.iconSize().width() * 5 / 3)
+        #)
         self.hide_button.clicked.connect(self.toggle_visibility)
 
-        rename_icon = get_icon("mdi.square-edit-outline")
-        self.rename_button = QPushButton(rename_icon, "")
+        #rename_icon = get_icon("mdi.square-edit-outline")
+        self.rename_button = QPushButton("Rename")
         self.rename_button.setToolTip("Rename")
         self.rename_button.setFlat(True)
-        self.rename_button.setMaximumWidth(
-            int(self.rename_button.iconSize().width() * 5 / 3)
-        )
+        #self.rename_button.setMaximumWidth(
+        #    int(self.rename_button.iconSize().width() * 5 / 3)
+        #)
         self.rename_button.setCheckable(True)
         self.rename_button.toggled.connect(self.rename_button_toggled)
 
-        close_icon = get_icon("mdi.close")
-        self.close_button = QPushButton(close_icon, "")
+        #close_icon = get_icon("mdi.close")
+        self.close_button = QPushButton("Delete")
         self.close_button.setToolTip("Delete")
         self.close_button.setFlat(True)
-        self.close_button.setMaximumWidth(
-            int(self.close_button.iconSize().width() * 5 / 3)
-        )
+        #self.close_button.setMaximumWidth(
+        #    int(self.close_button.iconSize().width() * 5 / 3)
+        #)
         self.close_button.clicked.connect(lambda: self.close_pressed(self.plot_number))
 
         self.layout = QHBoxLayout()
@@ -790,17 +790,17 @@ class PlotNameWidget(QWidget):
         """
         self.presenter.toggle_plot_visibility(self.plot_number)
 
-    def set_visibility_icon(self, is_shown):
-        """
-        Change the widget icon between shown and hidden
-        :param is_shown: True if plot is shown, false if hidden
-        """
-        if is_shown:
-            self.hide_button.setIcon(get_icon("mdi.eye"))
-            self.hide_button.setToolTip("Hide")
-        else:
-            self.hide_button.setIcon(get_icon("mdi.eye", "lightgrey"))
-            self.hide_button.setToolTip("Show")
+    #def set_visibility_icon(self, is_shown):
+    #    """
+    #    Change the widget icon between shown and hidden
+    #    :param is_shown: True if plot is shown, false if hidden
+    #    """
+    #    if is_shown:
+    #        self.hide_button.setIcon(get_icon("mdi.eye"))
+    #        self.hide_button.setToolTip("Hide")
+    #    else:
+    #        self.hide_button.setIcon(get_icon("mdi.eye", "lightgrey"))
+    #        self.hide_button.setToolTip("Show")
 
     def rename_plot(self):
         """

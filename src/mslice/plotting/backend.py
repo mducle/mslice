@@ -3,15 +3,16 @@ import importlib
 
 # local imports
 from qtpy import QT_VERSION
-
+from matplotlib_pyodide.html5_canvas_backend import FigureCanvasHTMLCanvas, NavigationToolbar2HTMLCanvas
 
 def get_canvas_and_toolbar_cls():
     """
     Return the FigureCanvas and NavigationToolbar types appropriate for this instance
     :return: A 2-tuple of (FigureCanvas, NavigationToolbar)
     """
-    backend = get_backend_module()
-    return getattr(backend, "FigureCanvas"), getattr(backend, "NavigationToolbar2QT")
+    #backend = get_backend_module()
+    #return getattr(backend, "FigureCanvas"), getattr(backend, "NavigationToolbar2QT")
+    return FigureCanvasHTMLCanvas, NavigationToolbar2HTMLCanvas
 
 
 def get_backend_module():

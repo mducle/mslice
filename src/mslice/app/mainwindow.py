@@ -6,7 +6,7 @@ from mslice.presenters.main_presenter import MainPresenter
 from mslice.presenters.slice_plotter_presenter import SlicePlotterPresenter
 from mslice.util.qt import load_ui
 from mslice.views.interfaces.mainview import MainView
-from mslice.widgets.ipythonconsole.ipython_widget import IPythonWidget
+#from mslice.widgets.ipythonconsole.ipython_widget import IPythonWidget
 from mslice.widgets.workspacemanager import TAB_2D, TAB_EVENT, TAB_HISTO, TAB_NONPSD
 from mslice.widgets.workspacemanager.command import Command as ws_command
 from mslice.widgets.cut.command import Command as cut_command
@@ -233,10 +233,11 @@ class MainWindow(MainView, QMainWindow):
         self.busy = False
 
     def setup_ipython(self):
-        ipython = IPythonWidget()
-        self._console = ipython
-        self.splitter.addWidget(ipython)
-        self.splitter.setSizes([500, 250])
+        self._console = None
+        #ipython = IPythonWidget()
+        #self._console = ipython
+        #self.splitter.addWidget(ipython)
+        #self.splitter.setSizes([500, 250])
 
     def show_warning(self, msg):
         """Show a warning message on status bar. If msg ==""  the function will clear the displayed message"""
@@ -305,6 +306,7 @@ class MainWindow(MainView, QMainWindow):
         return self.actionEUnitConvEnabled.isChecked()
 
     def print_startup_notifications(self):
+        pass
         # if notifications are required to be printed on mslice start up, add to list.
 
         # Disable this notification pending decision on changing the default
@@ -313,11 +315,12 @@ class MainWindow(MainView, QMainWindow):
         #               "This is expected to result in different output values to those obtained historically.\n" \
         #               "For more information, please refer to documentation at: " \
         #               "https://mantidproject.github.io/mslice/cutting.html"]
-        print_list = []
+        #print_list = []
 
-        for item in print_list:
-            for strn in item.split("\n"):
-                self._console.execute(f'print("{strn}")', hidden=True)
+        #for item in print_list:
+        #    for strn in item.split("\n"):
+        #        self._console.execute(f'print("{strn}")', hidden=True)
 
     def closeEvent(self, event):
-        self._console.cleanup()
+        pass
+        #self._console.cleanup()

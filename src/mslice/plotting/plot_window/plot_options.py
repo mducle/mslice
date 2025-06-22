@@ -7,7 +7,7 @@ from mslice.util.qt import load_ui
 from qtpy.QtGui import QRegExpValidator
 from qtpy.QtCore import QRegExp
 from mantidqt.utils.qt.line_edit_double_validator import LineEditDoubleValidator
-from mantidqt.icons import get_icon
+#from mantidqt.icons import get_icon
 
 
 class PlotOptionsDialog(QtWidgets.QDialog):
@@ -28,8 +28,8 @@ class PlotOptionsDialog(QtWidgets.QDialog):
         QtWidgets.QDialog.__init__(self, parent)
         load_ui(__file__, "plot_options.ui", self)
 
-        self.sclUpFntSz.setIcon(get_icon("mdi.arrow-up"))
-        self.sclDownFntSz.setIcon(get_icon("mdi.arrow-down"))
+        #self.sclUpFntSz.setIcon(get_icon("mdi.arrow-up"))
+        #self.sclDownFntSz.setIcon(get_icon("mdi.arrow-down"))
 
         self.x_min_validator = LineEditDoubleValidator(self.lneXMin, 0.0)
         self.lneXMin.setValidator(self.x_min_validator)

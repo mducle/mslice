@@ -63,7 +63,7 @@ class PlotSelectorPresenter(PresenterUtility, PlotSelectorPresenterInterface):
         :param plot_number: The unique number in GlobalFigureManager
         """
         self.view.append_to_plot_list(plot_number)
-        self.view.set_visibility_icon(plot_number, self.model.is_visible(plot_number))
+        #self.view.set_visibility_icon(plot_number, self.model.is_visible(plot_number))
 
     def remove_from_plot_list(self, plot_number):
         """

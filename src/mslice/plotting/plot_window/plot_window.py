@@ -62,8 +62,8 @@ class PlotWindow(QtWidgets.QMainWindow):
         self.stock_toolbar.hide()
 
         self.create_menus()
-        self.create_toolbar()
-        self.create_status_bar()
+        #self.create_toolbar()
+        #self.create_status_bar()
 
     def create_menus(self):
         self.menubar = self.menuBar()
@@ -272,11 +272,13 @@ class PlotWindow(QtWidgets.QMainWindow):
 
     def flag_as_kept(self):
         # The QActionGroup ensures the other is not checked
-        self.action_keep.setChecked(True)
+        #self.action_keep.setChecked(True)
+        pass
 
     def flag_as_current(self):
         # The QActionGroup ensures the other is not checked
-        self.action_make_current.setChecked(True)
+        #self.action_make_current.setChecked(True)
+        pass
 
     def display_error(self, error_text):
         # Displays an error message box

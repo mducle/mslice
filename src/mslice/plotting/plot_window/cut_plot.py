@@ -104,6 +104,7 @@ class CutPlot(IPlot):
         plot_window.menu_information.setDisabled(False)
         plot_window.menu_recoil_lines.setDisabled(True)
         plot_window.menu_intensity.setDisabled(True)
+        """
         plot_window.action_toggle_legends.setVisible(True)
         plot_window.action_keep.setVisible(True)
         plot_window.action_make_current.setVisible(True)
@@ -181,8 +182,10 @@ class CutPlot(IPlot):
         plot_window.action_gdos.triggered.connect(
             partial(self.show_intensity_plot, IntensityType.GDOS, True)
         )
+        """
 
     def disconnect(self, plot_window):
+        """
         plot_window.action_save_cut.triggered.disconnect()
         plot_window.action_flip_axis.triggered.disconnect()
         plot_window.action_gen_script.triggered.disconnect()
@@ -191,6 +194,8 @@ class CutPlot(IPlot):
         plot_window.action_niobium.triggered.disconnect()
         plot_window.action_tantalum.triggered.disconnect()
         plot_window.action_cif_file.triggered.disconnect()
+        """
+        pass
 
     def window_closing(self):
         icut = self._cut_plotter_presenter.get_icut()
@@ -382,16 +387,16 @@ class CutPlot(IPlot):
             self.manager.button_pressed_connected(False)
             self.manager.picking_connected(False)
 
-        self.plot_window.action_save_cut.setVisible(is_icut)
-        self.plot_window.action_plot_options.setVisible(not is_icut)
-        self.plot_window.keep_make_current_seperator.setVisible(not is_icut)
-        self.plot_window.action_keep.setVisible(not is_icut)
-        self.plot_window.action_make_current.setVisible(not is_icut)
-        self.plot_window.action_flip_axis.setVisible(is_icut)
-        self.plot_window.action_gen_script.setVisible(not is_icut)
-        self.plot_window.action_gen_script_clipboard.setVisible(not is_icut)
-        self.plot_window.action_waterfall.setVisible(not is_icut)
-        self.plot_window.menu_intensity.setDisabled(is_icut)
+        #self.plot_window.action_save_cut.setVisible(is_icut)
+        #self.plot_window.action_plot_options.setVisible(not is_icut)
+        #self.plot_window.keep_make_current_seperator.setVisible(not is_icut)
+        #self.plot_window.action_keep.setVisible(not is_icut)
+        #self.plot_window.action_make_current.setVisible(not is_icut)
+        #self.plot_window.action_flip_axis.setVisible(is_icut)
+        #self.plot_window.action_gen_script.setVisible(not is_icut)
+        #self.plot_window.action_gen_script_clipboard.setVisible(not is_icut)
+        #self.plot_window.action_waterfall.setVisible(not is_icut)
+        #self.plot_window.menu_intensity.setDisabled(is_icut)
 
         self.plot_window.showNormal()
         self.plot_window.activateWindow()
@@ -583,8 +588,8 @@ class CutPlot(IPlot):
         new_line = False
         line_containers = self._canvas.figure.gca().containers
         num_lines = len(line_containers)
-        self.plot_window.action_waterfall.setEnabled(num_lines > 1)
-        self.plot_window.toggle_waterfall_edit()
+        #self.plot_window.action_waterfall.setEnabled(num_lines > 1)
+        #self.plot_window.toggle_waterfall_edit()
         if not plot_over:
             self._reset_plot_window_options()
             self.ws_name = ws_name
@@ -607,11 +612,11 @@ class CutPlot(IPlot):
         self.update_bragg_peaks(refresh=True)
 
     def _reset_plot_window_options(self):
-        self.plot_window.action_aluminium.setChecked(False)
-        self.plot_window.action_copper.setChecked(False)
-        self.plot_window.action_niobium.setChecked(False)
-        self.plot_window.action_tantalum.setChecked(False)
-        self.plot_window.action_cif_file.setChecked(False)
+        #self.plot_window.action_aluminium.setChecked(False)
+        #self.plot_window.action_copper.setChecked(False)
+        #self.plot_window.action_niobium.setChecked(False)
+        #self.plot_window.action_tantalum.setChecked(False)
+        #self.plot_window.action_cif_file.setChecked(False)
 
         if self.default_options and not self._intensity_correction_flag:
             self._reset_intensity()
@@ -639,8 +644,9 @@ class CutPlot(IPlot):
         self.set_intensity_from_action(action)
 
     def trigger_action_from_type(self, intensity_type):
-        action = getattr(self.plot_window, IntensityCache.get_action(intensity_type))
-        action.trigger()
+        #action = getattr(self.plot_window, IntensityCache.get_action(intensity_type))
+        #action.trigger()
+        pass
 
     def selected_intensity(self):
         options = self.plot_window.menu_intensity.actions()

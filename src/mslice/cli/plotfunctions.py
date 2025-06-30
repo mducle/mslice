@@ -79,9 +79,9 @@ def errorbar(axes, workspace, *args, **kwargs):
     if intensity_min is not None or intensity_max is not None:
         axes.set_ylim(intensity_min, intensity_max)
 
-    if cur_canvas.manager.window.action_toggle_legends.isChecked():
-        leg = axes.legend(fontsize="medium")
-        legend_set_draggable(leg, True)
+    #if cur_canvas.manager.window.action_toggle_legends.isChecked():
+    #    leg = axes.legend(fontsize="medium")
+    #    legend_set_draggable(leg, True)
     axes.set_xlabel(get_display_name(cut_axis), picker=CUT_PICKER_TOL_PTS)
     axes.set_ylabel(CUT_INTENSITY_LABEL, picker=CUT_PICKER_TOL_PTS)
     if not plot_over:

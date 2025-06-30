@@ -21,12 +21,12 @@ from mslice.plotting.globalfiguremanager import GlobalFigureManager
 def release_active_interactive_cuts_on_slice_plots() -> None:
     for each_figure in GlobalFigureManager.all_figures():
         plot_handler = each_figure.plot_handler
-        if isinstance(plot_handler, SlicePlot):
-            action_icuts = plot_handler.plot_window.action_interactive_cuts
-            if not action_icuts.isChecked():
-                continue
-            plot_handler.toggle_interactive_cuts()
-            action_icuts.setChecked(False)
+        #if isinstance(plot_handler, SlicePlot):
+        #    action_icuts = plot_handler.plot_window.action_interactive_cuts
+        #    if not action_icuts.isChecked():
+        #        continue
+        #    plot_handler.toggle_interactive_cuts()
+        #    action_icuts.setChecked(False)
 
 
 class PlotFigureManagerQT(QtCore.QObject):
@@ -55,15 +55,15 @@ class PlotFigureManagerQT(QtCore.QObject):
         self._xgrid = False
         self._ygrid = False
 
-        self.window.action_keep.triggered.connect(self.report_as_kept)
-        self.window.action_make_current.triggered.connect(self.report_as_current)
-        self.window.action_save_image.triggered.connect(self.save_plot)
-        self.window.action_copy_image.triggered.connect(self.copy_plot)
-        self.window.action_print_plot.triggered.connect(self.print_plot)
-        self.window.action_plot_options.triggered.connect(self._plot_options)
-        self.window.action_toggle_legends.triggered.connect(self._toggle_legend)
-        self.button_pressed_connected(True)
-        self.picking_connected(True)
+        #self.window.action_keep.triggered.connect(self.report_as_kept)
+        #self.window.action_make_current.triggered.connect(self.report_as_current)
+        #self.window.action_save_image.triggered.connect(self.save_plot)
+        #self.window.action_copy_image.triggered.connect(self.copy_plot)
+        #self.window.action_print_plot.triggered.connect(self.print_plot)
+        #self.window.action_plot_options.triggered.connect(self._plot_options)
+        #self.window.action_toggle_legends.triggered.connect(self._toggle_legend)
+        #self.button_pressed_connected(True)
+        #self.picking_connected(True)
         self.window.show()
         self.window.raise_()
 

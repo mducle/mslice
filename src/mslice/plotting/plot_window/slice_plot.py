@@ -102,6 +102,7 @@ class SlicePlot(IPlot):
         plot_window.action_gen_script_clipboard.setVisible(True)
         plot_window.menu_information.setDisabled(False)
         plot_window.menu_intensity.setDisabled(False)
+        """
         plot_window.action_toggle_legends.setVisible(True)
         plot_window.action_keep.setVisible(True)
         plot_window.action_make_current.setVisible(True)
@@ -224,8 +225,10 @@ class SlicePlot(IPlot):
         plot_window.action_gen_script_clipboard.triggered.connect(
             lambda: self.generate_script(clipboard=True)
         )
+        """
 
     def disconnect(self, plot_window):
+        """
         plot_window.action_interactive_cuts.triggered.disconnect()
         plot_window.action_save_cut.triggered.disconnect()
         plot_window.action_flip_axis.triggered.disconnect()
@@ -246,6 +249,8 @@ class SlicePlot(IPlot):
         plot_window.action_tantalum.triggered.disconnect()
         plot_window.action_cif_file.triggered.disconnect()
         plot_window.action_gen_script.triggered.disconnect()
+        """
+        pass
 
     def window_closing(self):
         if self.icut is not None:

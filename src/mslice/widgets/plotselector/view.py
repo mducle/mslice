@@ -77,12 +77,12 @@ class PlotSelectorView(QWidget):
         self.sort_button = self._make_sort_button()
         self.export_button = self._make_export_button()
         self.filter_box = self._make_filter_box()
-        self.table_widget = self._make_table_widget()
+        #self.table_widget = self._make_table_widget()
 
         # Add the context menu
-        self.table_widget.setContextMenuPolicy(Qt.CustomContextMenu)
-        self.context_menu, self.export_menu = self._make_context_menu()
-        self.table_widget.customContextMenuRequested.connect(self.context_menu_opened)
+        #self.table_widget.setContextMenuPolicy(Qt.CustomContextMenu)
+        #self.context_menu, self.export_menu = self._make_context_menu()
+        #self.table_widget.customContextMenuRequested.connect(self.context_menu_opened)
 
         buttons_layout = FlowLayout()
         buttons_layout.setSpacing(1)
@@ -100,7 +100,7 @@ class PlotSelectorView(QWidget):
         layout = QVBoxLayout()
         layout.addLayout(buttons_layout)
         layout.addLayout(filter_layout)
-        layout.addWidget(self.table_widget)
+        #layout.addWidget(self.table_widget)
         # todo: Without the sizeHint() call the minimum size is not set correctly
         #       This needs some investigation as to why this is.
         layout.sizeHint()
@@ -130,14 +130,14 @@ class PlotSelectorView(QWidget):
         self.show_button.clicked.connect(self.presenter.show_multiple_selected)
         self.hide_button.clicked.connect(self.presenter.hide_selected_plots)
         self.close_button.clicked.connect(self.presenter.close_action_called)
-        self.select_all_button.clicked.connect(self.table_widget.selectAll)
-        self.table_widget.doubleClicked.connect(self.presenter.show_single_selected)
+        #self.select_all_button.clicked.connect(self.table_widget.selectAll)
+        #self.table_widget.doubleClicked.connect(self.presenter.show_single_selected)
         self.filter_box.textChanged.connect(self.presenter.filter_text_changed)
         self.deleteKeyPressed.connect(self.presenter.close_action_called)
         self.close_all_button.clicked.connect(self.presenter.close_all_action_called)
 
-        if DEBUG_MODE:
-            self.table_widget.clicked.connect(self.show_debug_info)
+        #if DEBUG_MODE:
+        #    self.table_widget.clicked.connect(self.show_debug_info)
 
     def get_presenter(self):
         return self.presenter
@@ -146,11 +146,13 @@ class PlotSelectorView(QWidget):
         """
         Special feature to make debugging easier, set DEBUG_MODE to
         true to get information printed when clicking on plots
-        """
+        ""
         row = self.table_widget.currentRow()
         widget = self.table_widget.cellWidget(row, Column.Name)
         print("Plot number: {}".format(widget.plot_number))
         print("Plot text: {}".format(widget.line_edit.text()))
+        """
+        pass
 
     def keyPressEvent(self, event):
         """
@@ -238,7 +240,8 @@ class PlotSelectorView(QWidget):
         :param position: The position to open the menu, e.g. where
                          the mouse button was clicked
         """
-        self.context_menu.exec_(self.table_widget.mapToGlobal(position))
+        pass
+        #self.context_menu.exec_(self.table_widget.mapToGlobal(position))
 
     # ------------------------ Plot Updates ------------------------
 
@@ -248,7 +251,7 @@ class PlotSelectorView(QWidget):
         automatically go to the correct place, and the flag can be
         set to determine whether it should initially be hidden or not
         :param plot_number: The unique number in GlobalFigureManager
-        """
+        ""
         plot_name_widget = PlotNameWidget(self.presenter, plot_number, self)
 
         number_item = HumanReadableSortItem(str(plot_number))
@@ -280,6 +283,8 @@ class PlotSelectorView(QWidget):
             self.table_widget.setItem(row_number, Column.LastActive, last_active_item)
 
             self.table_widget.setSortingEnabled(True)
+        """
+        pass
 
     def set_plot_list(self, plot_list):
         """
@@ -287,13 +292,15 @@ class PlotSelectorView(QWidget):
         for a 'things have gone wrong' scenario, and should only be
         used when errors are encountered.
         :param plot_list: the list of plot numbers
-        """
-        with QMutexLocker(self.mutex):
-            self.table_widget.clearContents()
+        ""
+        #with QMutexLocker(self.mutex):
+        #    self.table_widget.clearContents()
 
         self.filter_box.clear()
         for plot_number in plot_list:
             self.append_to_plot_list(plot_number)
+        """
+        pass
 
     def _get_row_and_widget_from_plot_number(self, plot_number):
         """
@@ -301,21 +308,25 @@ class PlotSelectorView(QWidget):
         to the given the plot name. This should always be called with
         a lock on self.mutex.
         :param plot_number: The unique number in GlobalFigureManager
-        """
+        ""
         for row in range(self.table_widget.rowCount()):
             widget = self.table_widget.cellWidget(row, Column.Name)
             if widget.plot_number == plot_number:
                 return row, widget
         return None, None
+        """
+        pass
 
     def remove_from_plot_list(self, plot_number):
         """
         Remove the given plot name from the list
         :param plot_number: The unique number in GlobalFigureManager
-        """
+        ""
         with QMutexLocker(self.mutex):
             row, widget = self._get_row_and_widget_from_plot_number(plot_number)
             self.table_widget.removeRow(row)
+        """
+        pass
 
     def set_active_font(self, plot_number, is_active):
         """
@@ -324,7 +335,7 @@ class PlotSelectorView(QWidget):
         :param plot_number: The unique number in GlobalFigureManager
         :param is_active: True if plot is the active one or false to
                           make the plot number not bold
-        """
+        ""
         with QMutexLocker(self.mutex):
             row, widget = self._get_row_and_widget_from_plot_number(plot_number)
             if row is None or widget is None:
@@ -336,6 +347,8 @@ class PlotSelectorView(QWidget):
             font.setBold(is_active)
             self.table_widget.item(row, Column.Number).setFont(font)
             self.table_widget.cellWidget(row, Column.Name).line_edit.setFont(font)
+        """
+        pass
 
     # ----------------------- Plot Selection ------------------------
 
@@ -344,7 +357,7 @@ class PlotSelectorView(QWidget):
         Returns a list with the numbers of all the currently selected
         plots
         :return: A list of strings with the plot numbers
-        """
+        ""
         selected = set(index.row() for index in self.table_widget.selectedIndexes())
         selected_plots = []
         for row in selected:
@@ -353,17 +366,21 @@ class PlotSelectorView(QWidget):
                     self.table_widget.cellWidget(row, Column.Name).plot_number
                 )
         return selected_plots
+        """
+        pass
 
     def get_currently_selected_plot_number(self):
         """
         Returns a string with the plot number for the currently
         active plot
         :return: A string with the plot number
-        """
+        ""
         row = self.table_widget.currentRow()
         if row < 0 or self.table_widget.isRowHidden(row):
             return None
         return self.table_widget.cellWidget(row, Column.Name).plot_number
+        """
+        pass
 
     def get_filter_text(self):
         """
@@ -404,15 +421,17 @@ class PlotSelectorView(QWidget):
     def unhide_all_plots(self):
         """
         Set all plot names to be visible (not hidden)
-        """
+        ""
         with QMutexLocker(self.mutex):
             for row in range(self.table_widget.rowCount()):
                 self.table_widget.setRowHidden(row, False)
+        """
+        pass
 
     def filter_plot_list(self):
         """
         Run through the plot list and show only if matching filter
-        """
+        ""
         with QMutexLocker(self.mutex):
             for row in range(self.table_widget.rowCount()):
                 widget = self.table_widget.cellWidget(row, Column.Name)
@@ -420,6 +439,8 @@ class PlotSelectorView(QWidget):
                     widget.plot_number
                 )
                 self.table_widget.setRowHidden(row, not is_shown_by_filter)
+        """
+        pass
 
     # ------------------------ Plot Renaming ------------------------
 
@@ -428,7 +449,7 @@ class PlotSelectorView(QWidget):
         Rename a plot in the plot list, also setting the sort key
         :param plot_number: The unique number in GlobalFigureManager
         :param new_name: The new plot name
-        """
+        ""
         with QMutexLocker(self.mutex):
             row, widget = self._get_row_and_widget_from_plot_number(plot_number)
 
@@ -446,6 +467,8 @@ class PlotSelectorView(QWidget):
                 Qt.InitialSortOrderRole, new_name
             )
             widget.set_plot_name(new_name)
+        """
+        pass
 
     def rename_selected_in_context_menu(self):
         """
@@ -530,7 +553,7 @@ class PlotSelectorView(QWidget):
         """
         If the sort order is changed by clicking on the column
         header this keeps the menu in sync.
-        """
+        ""
         order = self.table_widget.horizontalHeader().sortIndicatorOrder()
         column = self.table_widget.horizontalHeader().sortIndicatorSection()
 
@@ -553,13 +576,16 @@ class PlotSelectorView(QWidget):
                 action.setChecked(True)
             if action.text() == column_string:
                 action.setChecked(True)
+        """
+        pass
 
     def sort_order(self):
         """
         Returns the currently set sort order
         :return: Either Qt.AscendingOrder or Qt.DescendingOrder
         """
-        return self.table_widget.horizontalHeader().sortIndicatorOrder()
+        pass
+        #return self.table_widget.horizontalHeader().sortIndicatorOrder()
 
     def set_sort_order(self, is_ascending):
         """
@@ -567,7 +593,7 @@ class PlotSelectorView(QWidget):
 
         See also HumanReadableSortItem class
         :param is_ascending: If true sort ascending, else descending
-        """
+        ""
         if is_ascending:
             sort_order = Qt.AscendingOrder
         else:
@@ -575,22 +601,28 @@ class PlotSelectorView(QWidget):
 
         with QMutexLocker(self.mutex):
             self.table_widget.sortItems(self.sort_type(), sort_order)
+        """
+        pass
 
     def sort_type(self):
         """
         Returns the currently set sort type
         :return: The sort type as a Column enum
-        """
+        ""
         column_number = self.table_widget.horizontalHeader().sortIndicatorSection()
         return Column(column_number)
+        """
+        pass
 
     def set_sort_type(self, sort_type):
         """
         Set sorting to be by name
         :param sort_type: A Column enum for the column to sort on
-        """
+        ""
         with QMutexLocker(self.mutex):
             self.table_widget.sortItems(sort_type, self.sort_order())
+        """
+        pass
 
     def set_last_active_values(self, last_active_values):
         """
@@ -599,7 +631,7 @@ class PlotSelectorView(QWidget):
         :param last_active_values: A dictionary with keys as plot
                                    number and values as last active
                                    order
-        """
+        ""
         with QMutexLocker(self.mutex):
             self.table_widget.setSortingEnabled(False)
             for row in range(self.table_widget.rowCount()):
@@ -613,6 +645,8 @@ class PlotSelectorView(QWidget):
 
             # self.table_widget.sortItems(Column.LastActive, self.sort_order())
             self.table_widget.setSortingEnabled(True)
+        """
+        pass
 
     # ---------------------- Plot Exporting -------------------------
 

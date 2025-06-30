@@ -23,15 +23,15 @@ class DataLoaderWidget(QWidget):  # and some view interface
         self.directory = QDir(os.path.expanduser("~"))
         self._sort_column = 0
         self.reload_model()
-        self.table_view.horizontalHeader().swapSections(
-            1, 3
-        )  # Swap the type and date modified columns
+        #self.table_view.horizontalHeader().swapSections(
+        #    1, 3
+        #)  # Swap the type and date modified columns
         self.txtpath.setText(self.directory.absolutePath())
         self._presenter = DataLoaderPresenter(self)
         self.btnload.setEnabled(False)
         self.btnmerge.setEnabled(False)
         self.table_view.activated.connect(self.activated)
-        self.table_view.clicked.connect(self.validate_selection)
+        #self.table_view.clicked.connect(self.validate_selection)
         self.txtpath.editingFinished.connect(self.refresh)
         self.btnback.clicked.connect(self.back)
         self.sort.currentIndexChanged.connect(self.sort_files)

@@ -3,7 +3,7 @@ import importlib
 
 # local imports
 from qtpy import QT_VERSION
-from matplotlib_pyodide.html5_canvas_backend import FigureCanvasHTMLCanvas, NavigationToolbar2HTMLCanvas
+from mantidqt.MPLwidgets import FigureCanvas, NavigationToolbar2QT
 
 def get_canvas_and_toolbar_cls():
     """
@@ -12,7 +12,7 @@ def get_canvas_and_toolbar_cls():
     """
     #backend = get_backend_module()
     #return getattr(backend, "FigureCanvas"), getattr(backend, "NavigationToolbar2QT")
-    return FigureCanvasHTMLCanvas, NavigationToolbar2HTMLCanvas
+    return FigureCanvas, NavigationToolbar2QT
 
 
 def get_backend_module():

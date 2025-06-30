@@ -110,6 +110,7 @@ class MainWindow(MainView, QMainWindow):
         self.data_loading.busy.connect(self.show_busy)
         self.action_quit.triggered.connect(self.close)
 
+        """
         self._en_default_actions = []
         for e_unit in EnergyUnits.get_all_units():
             action = add_action(
@@ -141,6 +142,7 @@ class MainWindow(MainView, QMainWindow):
         )
 
         self.print_startup_notifications()
+        """
 
     def setup_save(self):
         menu = QMenu(self.btnSave)

@@ -631,9 +631,10 @@ class CutPlot(IPlot):
             self.plot_window.display_error(e.message)
 
     def _reset_intensity(self):
-        options = self.plot_window.menu_intensity.actions()
-        for op in options:
-            op.setChecked(False)
+        #options = self.plot_window.menu_intensity.actions()
+        #for op in options:
+        #    op.setChecked(False)
+        pass
 
     def set_intensity_from_action(self, intensity):
         self._reset_intensity()
@@ -650,10 +651,11 @@ class CutPlot(IPlot):
         pass
 
     def selected_intensity(self):
-        options = self.plot_window.menu_intensity.actions()
-        for option in options:
-            if option.isChecked():
-                return option
+        #options = self.plot_window.menu_intensity.actions()
+        #for option in options:
+        #    if option.isChecked():
+        #        return option
+        pass
 
     def show_intensity_plot(self, intensity_type, temp_dependent):
         self._intensity_correction_flag = True

@@ -59,6 +59,7 @@ def plot_cut_impl(
 
     if cur_fig.canvas.manager.plot_handler.is_icut():
         cur_fig.canvas.manager.plot_handler.update_bragg_peaks()
+    cur_fig.show()
 
     return ax.lines
 
